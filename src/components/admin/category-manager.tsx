@@ -5,9 +5,10 @@ import { Label } from "../ui/label"
 import { Button } from "../ui/button"
 import { Plus, Trash2Icon } from "lucide-react"
 import { useState } from "react"
-import { addNewCategoryAction } from "@/actions/admin-actions"
+import { addNewCategoryAction, deleteCategoryAction } from "@/actions/admin-actions"
 import { toast } from "sonner"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table"
+import Alert from "../common/alert"
 
 type Category = {
 	id: number;
@@ -45,6 +46,14 @@ export default function CategoryManager({categories: initialCategories }: Catego
 			console.log(err)
 		}
 
+	}
+
+	const handleDeleteCategory = async (id: number)=>{
+		const res = await deleteCategoryAction(id)
+		if(res?.success){
+			setCategories( categories.filter(c => c.id  != id))
+		 toast(res.message)	
+		}
 	}
 
 	return <div className="space-y-6">
@@ -85,9 +94,18 @@ export default function CategoryManager({categories: initialCategories }: Catego
 										<TableCell className="font-medium">{category.name}</TableCell>
 										<TableCell>{new Date(category.createdAt).toLocaleDateString()}</TableCell>
 										<TableCell>
-											<Button className="cursor-pointer" variant='ghost' size='icon'>
-												<Trash2Icon className="h-5 w-5 text-red-500 "  />
-											</Button>
+											<Alert 
+												title="Delete Category"
+												description="Are you sure you want to delete this category?"
+												onConfirm = {()=> handleDeleteCategory(category.id)}
+												trigger = {
+													<Button className="cursor-pointer" variant='ghost' size='icon'>
+														<Trash2Icon className="h-5 w-5 text-red-500 "  />
+													</Button>
+												}
+
+											/>
+											
 										</TableCell>
 
 									</TableRow>

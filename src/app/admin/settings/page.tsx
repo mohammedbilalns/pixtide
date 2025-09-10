@@ -10,7 +10,7 @@ export default async  function Settings(){
 	return ( 
 		<div className="container py-10 mx-auto">
 			<h1 className="text-3xl font-bold mb-5">Admin Settings</h1>
-			<div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-7">
+			<div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-7">
 				<Card className="bg-white">
 					<CardHeader className="pb-2 " >
 						<CardTitle className="flex items-center text-lg font-medium" >
@@ -51,7 +51,6 @@ export default async  function Settings(){
 					</CardHeader>
 					<CardContent>
 						<CategoryManager categories={categories}/>
-
 					</CardContent>
 
 				</Card>
