@@ -138,8 +138,8 @@ async function GalleryContent({params, searchParams}: GalleryDetailsPageProps){
 
 												) 
 												: hasPurchasedAsset 
-													? ( <Button asChild className="cursor-pointer w-full bg-green-600 text-white h-12  ">
-														<a download >
+													? ( <Button  asChild className="cursor-pointer w-full bg-green-600 text-white h-12  ">
+														<a href={`/api/download/${params.id}`} download >
 															<Download className="mr-2 w-6 h-6"  />
 															Download Asset
 														</a>
