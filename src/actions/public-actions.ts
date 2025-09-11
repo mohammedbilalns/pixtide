@@ -1,6 +1,5 @@
 import { db } from "@/lib/db";
 import { asset, category, user } from "@/lib/db/schema";
-import { username } from "better-auth/plugins";
 import { and, eq } from "drizzle-orm";
 
 export async function getPublicAssetsAction(categoryId?: number){
@@ -23,7 +22,7 @@ export async function getPublicAssetsAction(categoryId?: number){
 	}
 }
 
-export async function getAssetById(assetId: string){
+export async function getAssetByIdAction(assetId: string){
 	try {
 		const [result] = await db.select({
 			asset: asset,

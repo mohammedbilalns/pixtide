@@ -32,7 +32,7 @@ export default function GalleryPage({searchParams}:GalleryPageProps){
 
 
 async function GalleryContent({searchParams}:GalleryPageProps){
-	const categoryId = searchParams.category ? parseInt(searchParams.category): undefined
+	const categoryId =  searchParams.category ? parseInt(searchParams.category): undefined
 	const categories = await getCategoriesAction()
 	const assets = await getPublicAssetsAction(categoryId)
 
