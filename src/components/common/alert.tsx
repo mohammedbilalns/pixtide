@@ -19,7 +19,7 @@ interface AlertProps {
 
 export default function Alert({ title, description, onConfirm, trigger }: AlertProps) {
   return (
-    <AlertDialog>
+    <AlertDialog  >
       <AlertDialogTrigger asChild>{trigger}</AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
@@ -28,7 +28,7 @@ export default function Alert({ title, description, onConfirm, trigger }: AlertP
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel className="cursor-pointer">Cancel</AlertDialogCancel>
-          <AlertDialogAction className="cursor-pointer bg-teal-600"  onClick={onConfirm}>Confirm</AlertDialogAction>
+          <AlertDialogAction className="cursor-pointer bg-teal-500 hover:bg-teal-600"  onClick={onConfirm}>Confirm</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
