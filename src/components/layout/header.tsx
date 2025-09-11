@@ -35,7 +35,7 @@ export default function Header() {
 
   if (isLoginPage) return null;
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-slate-200/60 bg-white/70 backdrop-blur-md shadow-md">
+    <header className=" w-screen fixed top-0 left-0 right-0 z-50 border-b border-slate-200/60 bg-white/70 backdrop-blur-md shadow-md">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         {/* Logo */}
         <div className="flex items-center gap-4">
