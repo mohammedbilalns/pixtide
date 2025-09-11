@@ -10,6 +10,7 @@ import { headers } from "next/headers"
 import { redirect } from "next/navigation"
 import {v4 as uuidv4} from "uuid"
 import { success } from "zod"
+import { createInvoiceAction } from "./invoice-actions"
 
 async function checkPurchaseExists(assetId: string, userId: string){
 	const existingPurchase = await db.select().from(purchase).where(and(eq(purchase.assetId,  assetId), eq(purchase.userId,userId))).limit(1)
@@ -115,6 +116,10 @@ export async function recordPurchaseAction(assetId:string, paypalOrderId: string
 		})
 
 		// create invoice 
+		const invoiceResult = await createInvoiceAction(purchaseUuid)
+		if(!invoiceResult.success){
+			console.error("Failed to create invoice ")
+		}
 		revalidatePath(`/gallery/${assetId}`)
 		revalidatePath(`/gallety/purchases`)
 
