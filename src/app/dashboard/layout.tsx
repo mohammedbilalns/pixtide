@@ -11,9 +11,7 @@ export default async function UserDashboardLayour({children}: {children: React.R
 	if(!session || !session.user ){
 		redirect('/login')
 	}
-	if(session.user.role !== "user"){
-		redirect("/admin/settings")
-	}
+
 	return <main className="flex-1 p-4 lg:p-6">
 		{children}
 	</main>

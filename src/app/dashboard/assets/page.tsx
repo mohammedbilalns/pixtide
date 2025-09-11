@@ -5,13 +5,12 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
 export default  async function UserAssetsPage(){
-	const session = await auth.api.getSession({
+ 	const session = await auth.api.getSession({
 		headers: await headers()
 	})
 	if(!session) return null 
 	
 	const [categories, assets] = await Promise.all([getCategoriesAction(), getUserAssetsAction(session?.user.id)])
-	console.log(assets)
 	return (
 
 		<div className=" container mx-auto py-6">
