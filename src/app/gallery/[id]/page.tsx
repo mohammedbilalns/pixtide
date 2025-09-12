@@ -146,7 +146,7 @@ async function GalleryContent({params, searchParams}: GalleryDetailsPageProps){
 
 													</Button> ) 
 													: ( <form action={handlePurchase}>
-														<Button type="submit" className="w-full bg-black text-white h-12 ">
+														<Button type="submit" className=" cursor-pointer w-full bg-black text-white h-12 ">
 															<ShoppingCart className="mr-2 w-6 h-6" />
 															Purchase Now 
 														</Button>

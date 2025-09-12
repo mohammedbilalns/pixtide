@@ -1,5 +1,4 @@
 "use client"
-
 import { signOut, useSession } from "@/lib/auth-client";
 import { LogOut, Package } from "lucide-react";
 import Link from "next/link";
@@ -22,7 +21,6 @@ export default function Header() {
   const router = useRouter();
   const user = session?.user;
   const isAdminUser = user?.role == "admin";
-
   const handleLogout = async () => {
     await signOut({
       fetchOptions: {
@@ -32,7 +30,6 @@ export default function Header() {
       },
     });
   };
-
   if (isLoginPage) return null;
   return (
     <header className=" w-screen fixed top-0 left-0 right-0 z-50 border-b border-slate-200/60 bg-white/70 backdrop-blur-md shadow-md">
@@ -47,7 +44,6 @@ export default function Header() {
               Asset Platform
             </span>
           </Link>
-
           {/* Nav links */}
           <nav className="hidden md:flex items-center gap-6 ml-6">
             <Link
@@ -56,8 +52,9 @@ export default function Header() {
             >
               Gallery
             </Link>
-            {!isPending && user && !isAdminUser && (
+            {!isPending && user && (
               <>
+                {/* Regular user links - shown for all logged-in users */}
                 <Link
                   href={"/dashboard/assets"}
                   className="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors"
@@ -70,27 +67,28 @@ export default function Header() {
                 >
                   My Purchases
                 </Link>
-              </>
-            )}
-            {!isPending && user && isAdminUser && (
-              <>
-                <Link
-                  href={"/admin/assets-approval"}
-                  className="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors"
-                >
-                  Assets Approval
-                </Link>
-                <Link
-                  href={"/admin/settings"}
-                  className="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors"
-                >
-                  Settings
-                </Link>
+                
+                {/* Admin-specific links - shown only for admin users */}
+                {isAdminUser && (
+                  <>
+                    <Link
+                      href={"/admin/assets-approval"}
+                      className="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors"
+                    >
+                      Assets Approval
+                    </Link>
+                    <Link
+                      href={"/admin/settings"}
+                      className="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors"
+                    >
+                      Settings
+                    </Link>
+                  </>
+                )}
               </>
             )}
           </nav>
         </div>
-
         {/* Right section */}
         <div className="flex items-center gap-6">
           {isPending ? null : user ? (
@@ -110,7 +108,6 @@ export default function Header() {
                     </Avatar>
                   </Button>
                 </DropdownMenuTrigger>
-
                 <DropdownMenuContent className="w-52 rounded-xl border border-slate-200 bg-white/95 backdrop-blur-sm shadow-xl p-2 focus:outline-none">
                   <DropdownMenuLabel className="px-3 py-2">
                     <div className="flex flex-col space-y-0.5">
@@ -142,4 +139,3 @@ export default function Header() {
     </header>
   );
 }
-
