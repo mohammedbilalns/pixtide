@@ -29,7 +29,7 @@ export async function POST(request:Request){
 
 	} catch (e) {
 		
-		console.error("Error while generating cloudinary signature")
+		console.error("Error while generating cloudinary signature",e)
 		return NextResponse.json({
 			error: "Failed to generate signature"
 		}, {status: 500})

@@ -52,10 +52,9 @@ export async function uploadAssetAction(formdata: FormData){
 
 export async function getUserAssetsAction(userId: string){
 	try {
-		return await db.select().from(asset).where(eq(asset.userId, userId)).orderBy(asset.createdAt)
-
-		
+		return await db.select().from(asset).where(eq(asset.userId, userId)).orderBy(asset.createdAt)	
 	} catch (err) {
+		console.log(err)
 		return []
 	}
 }

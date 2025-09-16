@@ -1,4 +1,4 @@
-import {number, z} from "zod"
+import { z} from "zod"
 
 export const AssetSchema = z.object({
 	title: z.string().min(2,"Title must be atleast 2 characters long").max(50, "Title cannot exceed 50 character "),

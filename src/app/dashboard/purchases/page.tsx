@@ -43,7 +43,7 @@ export default async function Purchases() {
               <div>
                 <h3 className="text-xl font-semibold">No purchases yet</h3>
                 <p className="text-muted-foreground mt-1">
-                  You haven't purchased any assets yet. Start exploring our marketplace!
+                  You haven&apos;t purchased any assets yet. Start exploring our marketplace!
                 </p>
               </div>
               <Button asChild className="mt-4">

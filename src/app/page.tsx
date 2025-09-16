@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Package, Share2, Upload } from "lucide-react";
-import { Share } from "next/font/google";
 import Link from "next/link";
 
 export default function Home() {
@@ -15,7 +14,7 @@ export default function Home() {
 						<Package className="text-white h-8 w-8" />
 
 					</div>
-					<h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-teal-700">Asset Management Platform</h1>
+					<h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-teal-700">PixTide Share Your Assets</h1>
 
 
 				</div>

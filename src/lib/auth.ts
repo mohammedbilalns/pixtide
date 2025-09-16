@@ -32,5 +32,6 @@ export const auth =  betterAuth({
 			defaultRole: userRole
 		}),
 		nextCookies()
-	]
+	],
+	secret: process.env.BETTER_AUTH_SECRET
 })

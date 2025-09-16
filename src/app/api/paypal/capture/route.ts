@@ -1,6 +1,5 @@
 import { recordPurchaseAction } from "@/actions/payment-actions";
 import { auth } from "@/lib/auth";
-import { NextURL } from "next/dist/server/web/next-url";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 

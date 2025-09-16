@@ -1,7 +1,6 @@
 import { getCategoriesAction } from "@/actions/dashboard-actions";
 import { getPublicAssetsAction } from "@/actions/public-actions";
 import { Button } from "@/components/ui/button";
-import { category } from "@/lib/db/schema";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

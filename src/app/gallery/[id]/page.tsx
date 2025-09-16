@@ -1,5 +1,5 @@
 import { Suspense } from "react"
-import { CheckCircle, CircleX, Download, Heading1, Info, Loader2, ShoppingBag, ShoppingCart, Tag } from "lucide-react"
+import { CheckCircle, CircleX, Download, Info, Loader2, ShoppingCart, Tag } from "lucide-react"
 import { auth } from "@/lib/auth"
 import { headers } from "next/headers"
 import { notFound, redirect } from "next/navigation"
@@ -49,7 +49,7 @@ async function GalleryContent({params, searchParams}: GalleryDetailsPageProps){
 		notFound()
 	}
 
-	const {asset, categoryName, username,userImage,userId} = result
+	const {asset, categoryName, username,userId} = result
 	const isAuthor = session?.user.id === userId 
 	const handlePurchase =  async () => {
 		"use server"
@@ -133,7 +133,7 @@ async function GalleryContent({params, searchParams}: GalleryDetailsPageProps){
 												( 
 													<div className="bg-blue-50 text-blue-700 p-5 rounded-lg flex items-start gap-3">
 														<Info className="w-5 h-5 text-blue-500 mt-1 flex-shrink-0 " />
-														<p className="text-sm">This is your own asset. You can't purchase your own asset</p>	
+														<p className="text-sm">This is your own asset. You can&apos;t purchase your own asset</p>	
 													</div>
 
 												) 

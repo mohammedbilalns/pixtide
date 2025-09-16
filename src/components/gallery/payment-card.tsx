@@ -14,7 +14,7 @@ interface PaymentCardProps{
 
 }
 
-export default async  function PaymentCard({ userId,isAuthor, hasPurchasedAsset, assetId }:PaymentCardProps){
+export default function PaymentCard({ userId,isAuthor, hasPurchasedAsset, assetId }:PaymentCardProps){
 
 	const handlePurchase =  async () => {
 		"use server"
@@ -47,7 +47,7 @@ export default async  function PaymentCard({ userId,isAuthor, hasPurchasedAsset,
 							( 
 								<div className="bg-blue-50 text-blue-700 p-5 rounded-lg flex items-start gap-3">
 									<Info className="w-5 h-5 text-blue-500 mt-1 flex-shrink-0 " />
-									<p className="text-sm">This is your own asset. You can't purchase your own asset</p>	
+									<p className="text-sm">This is your own asset. You can&apos;t purchase your own asset</p>	
 								</div>
 
 							) 

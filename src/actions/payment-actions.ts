@@ -2,15 +2,20 @@
 
 import { auth } from "@/lib/auth"
 import { db } from "@/lib/db"
-import { asset, payment, purchase, session } from "@/lib/db/schema"
+import { asset, payment, purchase } from "@/lib/db/schema"
 import { and, eq } from "drizzle-orm"
 import { revalidatePath } from "next/cache"
-import { printCustomRoutes } from "next/dist/build/utils"
 import { headers } from "next/headers"
 import { redirect } from "next/navigation"
 import {v4 as uuidv4} from "uuid"
-import { success } from "zod"
 import { createInvoiceAction } from "./invoice-actions"
+
+
+interface PayPalLink {
+  href: string;
+  rel: string;
+  method: string;
+}
 
 async function checkPurchaseExists(assetId: string, userId: string){
 	const existingPurchase = await db.select().from(purchase).where(and(eq(purchase.assetId,  assetId), eq(purchase.userId,userId))).limit(1)
@@ -65,7 +70,7 @@ export async function  createPaypalOrderAction(assetId: string){
 		if(data.id){
 		 return {
 				orderId : data.id , 
-				approvalLink : data.links.find((link:any)=> link.rel === 'approve').href
+				approvalLink : data.links.find((link:PayPalLink)=> link.rel === 'approve').href
 			}	
 		}else{
 			throw new Error("Failed to create paypal order ")

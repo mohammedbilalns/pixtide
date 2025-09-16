@@ -1,5 +1,5 @@
 'use client'
-import { Plus, Signature, Upload } from "lucide-react"
+import { Plus, Upload } from "lucide-react"
 import { Dialog, DialogFooter, DialogHeader, DialogTrigger } from "../ui/dialog"
 import { Button } from "../ui/button"
 import { useState } from "react"
@@ -15,6 +15,25 @@ type Category  = {
 	id: number, 
 	name: string, 
 	createdAt: Date
+}
+
+interface CloudinaryUploadResponse {
+  asset_id: string;
+  public_id: string;
+  version: number;
+  version_id: string;
+  signature: string;
+  width: number;
+  height: number;
+  format: string;
+  resource_type: string;
+  created_at: string;
+  tags: string[];
+  bytes: number;
+  type: string;
+  etag: string;
+  url: string;
+  secure_url: string;
 }
 
 interface UploadDialogProps {
@@ -100,7 +119,7 @@ export default function UploadAssets({categories}: UploadDialogProps){
 				}
 			}
 
-			const cloudinaryPromise = new Promise<any>((resolve, reject)=>{
+			const cloudinaryPromise = new Promise<CloudinaryUploadResponse>((resolve, reject)=>{
 				xhr.onload = ()=>{
 					if(xhr.status >= 200 && xhr.status <300){
 						const response = JSON.parse(xhr.responseText)
