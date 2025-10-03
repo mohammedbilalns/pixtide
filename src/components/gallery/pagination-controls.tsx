@@ -20,7 +20,7 @@ export const PaginationControls: FC<PaginationControlsProps> = ({
   const pathname = usePathname();
 
   const createPageURL = (pageNumber: number | string) => {
-    const params = new URLSearchParams(searchParams as any);
+    const params = new URLSearchParams(searchParams.toString() );
     params.set("page", pageNumber.toString());
     return `${pathname}?${params.toString()}`;
   };
