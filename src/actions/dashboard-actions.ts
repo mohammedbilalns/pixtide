@@ -18,7 +18,6 @@ export async function getCategoriesAction(){
 }
 
 export async function uploadAssetAction(formdata: FormData){
-	console.log("Formdata" ,formdata)
 	const session = await auth.api.getSession({
 		headers: await headers()
 	})
@@ -58,3 +57,5 @@ export async function getUserAssetsAction(userId: string){
 		return []
 	}
 }
+
+

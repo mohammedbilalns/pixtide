@@ -1,16 +1,17 @@
 import { getCategoriesAction } from "@/actions/dashboard-actions";
 import { getPublicAssetsAction } from "@/actions/public-actions";
+import { PaginationControls } from "@/components/gallery/pagination-controls";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense } from "react";
+import { Suspense} from "react";
 
 
 interface GalleryPageProps {
 	searchParams: {
 		category?: string; 
-
+		page?: string; 
 	}
 }
 
@@ -32,8 +33,10 @@ export default function GalleryPage({searchParams}:GalleryPageProps){
 
 async function GalleryContent({searchParams}:GalleryPageProps){
 	const categoryId =  searchParams.category ? parseInt(searchParams.category): undefined
+	const currentPage = searchParams.page ? parseInt(searchParams.page) : 1
 	const categories = await getCategoriesAction()
-	const assets = await getPublicAssetsAction(categoryId)
+	const {assets, totalPages} = await getPublicAssetsAction(currentPage, categoryId)
+	//const assets = await getPublicAssetsAction(categoryId)
 
 	return <div className="container mx-auto min-h-screen px-4 bg-white">
 		<div className="sticky top-0 z-30 g-white border-b py-3 px-4">
@@ -99,6 +102,14 @@ async function GalleryContent({searchParams}:GalleryPageProps){
 					)
 
 			}
+
+			{
+				totalPages > 1 && <PaginationControls currentPage={currentPage} totalPages={totalPages} searchParams={searchParams} />
+			}
+
 		</div>
+
+	
+		
 	</div>
 }
