@@ -1,8 +1,9 @@
 "use client"
 import { signOut, useSession } from "@/lib/auth-client";
-import { LogOut, Package } from "lucide-react";
+import { LogOut, Package, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
 import { Button } from "../ui/button";
 import {
   DropdownMenu,
@@ -19,8 +20,10 @@ export default function Header() {
   const isLoginPage: boolean = pathName == "/login";
   const { data: session, isPending } = useSession();
   const router = useRouter();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const user = session?.user;
   const isAdminUser = user?.role == "admin";
+  
   const handleLogout = async () => {
     await signOut({
       fetchOptions: {
@@ -30,7 +33,9 @@ export default function Header() {
       },
     });
   };
+  
   if (isLoginPage) return null;
+  
   return (
     <header className=" w-screen fixed top-0 left-0 right-0 z-50 border-b border-slate-200/60 bg-white/70 backdrop-blur-md shadow-md">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
@@ -44,7 +49,7 @@ export default function Header() {
               PixTide
             </span>
           </Link>
-          {/* Nav links */}
+          {/* Nav links - Desktop */}
           <nav className="hidden md:flex items-center gap-6 ml-6">
             <Link
               href="/gallery"
@@ -89,6 +94,7 @@ export default function Header() {
             )}
           </nav>
         </div>
+        
         {/* Right section */}
         <div className="flex items-center gap-6">
           {isPending ? null : user ? (
@@ -134,8 +140,75 @@ export default function Header() {
               </Button>
             </Link>
           )}
+          
+          {/* Mobile menu button */}
+          <Button
+            variant="ghost"
+            className="md:hidden cursor-pointer p-2"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? (
+              <X className="h-6 w-6 text-slate-600" />
+            ) : (
+              <Menu className="h-6 w-6 text-slate-600" />
+            )}
+          </Button>
         </div>
       </div>
+      
+      {/* Mobile menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden bg-white border-t border-slate-200/60 shadow-lg">
+          <nav className="container mx-auto px-4 py-4 flex flex-col gap-4">
+            <Link
+              href="/gallery"
+              className="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors py-2"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Gallery
+            </Link>
+            {!isPending && user && (
+              <>
+                {/* Regular user links - shown for all logged-in users */}
+                <Link
+                  href={"/dashboard/assets"}
+                  className="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors py-2"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Assets
+                </Link>
+                <Link
+                  href={"/dashboard/purchases"}
+                  className="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors py-2"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  My Purchases
+                </Link>
+                
+                {/* Admin-specific links - shown only for admin users */}
+                {isAdminUser && (
+                  <>
+                    <Link
+                      href={"/admin/assets-approval"}
+                      className="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors py-2"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Assets Approval
+                    </Link>
+                    <Link
+                      href={"/admin/settings"}
+                      className="text-sm font-medium text-slate-600 hover:text-teal-600 transition-colors py-2"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Settings
+                    </Link>
+                  </>
+                )}
+              </>
+            )}
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
